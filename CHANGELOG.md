@@ -1,3 +1,14 @@
+Changes in [1.12.20](https://github.com/robertpelloni/element-web/releases/tag/v1.12.20) (2025-05-21)
+==================================================================================================
+
+## ✨ Features
+
+* Comprehensive merge of remaining robertpelloni feature branches.
+* Integrated latest changes from upstream/develop.
+* Updated documentation for monorepo structure and libraries.
+* Advanced project management framework stabilization.
+* Overhauled root-level documentation (VISION.md, ROADMAP.md, AGENTS.md, etc.).
+
 Changes in [1.12.18](https://github.com/element-hq/element-web/releases/tag/v1.12.18) (2026-05-12)
 ==================================================================================================
 ## ✨ Features
