@@ -1,0 +1,72 @@
+{
+    "name": "storybook-launcher",
+    "displayName": "Storybook Launcher",
+    "description": "Quick access to the Storybook Playground from the Activity Bar",
+    "version": "0.0.6",
+    "publisher": "element-hq",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": ["Other"],
+    "activationEvents": ["*"],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "storybookLauncher.openInBrowser",
+                "title": "Open Storybook Playground In Browser",
+                "icon": "$(globe)"
+            },
+            {
+                "command": "elementWebLauncher.openInBrowser",
+                "title": "Open Element Web In Browser",
+                "icon": "$(globe)"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "storybook-launcher",
+                    "title": "Element Prototyping",
+                    "icon": "media/icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "storybook-launcher": [
+                {
+                    "id": "storybookLauncher.welcome",
+                    "name": "Storybook Playground"
+                },
+                {
+                    "id": "elementWebLauncher.welcome",
+                    "name": "Element Web"
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "storybookLauncher.welcome",
+                "contents": "Open the AI Prototype story in Storybook.\n\n[$(globe) Open Storybook Playground In Browser](command:storybookLauncher.openInBrowser)"
+            },
+            {
+                "view": "elementWebLauncher.welcome",
+                "contents": "Open the full Element Web app for in-context prototyping.\n\n[$(globe) Open Element Web In Browser](command:elementWebLauncher.openInBrowser)"
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "storybookLauncher.openInBrowser",
+                    "when": "view == storybookLauncher.welcome",
+                    "group": "navigation"
+                },
+                {
+                    "command": "elementWebLauncher.openInBrowser",
+                    "when": "view == elementWebLauncher.welcome",
+                    "group": "navigation"
+                }
+            ]
+        }
+    }
+}
