@@ -7,6 +7,7 @@ Please see LICENSE files in the repository root for full details.
 
 import { createRoot, type Root } from "react-dom/client";
 import { type Api, type RuntimeModuleConstructor } from "@element-hq/element-web-module-api";
+import { MatrixClient, EventType } from "matrix-js-sdk/src/matrix";
 import { I18nApi } from "@element-hq/web-shared-components";
 
 import { ModuleRunner } from "./ModuleRunner.ts";
@@ -54,6 +55,7 @@ export class ModuleApi implements Api {
     public static get instance(): ModuleApi {
         if (!ModuleApi._instance) {
             ModuleApi._instance = new ModuleApi();
+            ModuleApi.patchClientForEnvelopeTransforms();
             window.mxModuleApi = ModuleApi._instance;
         }
         return ModuleApi._instance;
@@ -100,6 +102,67 @@ export class ModuleApi implements Api {
 
     public createRoot(element: Element): Root {
         return createRoot(element);
+    }
+
+    /**
+     * Patches MatrixClient.sendEventHttpRequest to apply encrypted envelope transforms.
+     * Must be called once at startup.
+     * 
+     * XXX: TODO: FIXME: this is a horrific workaround to avoid touching js-sdk
+     * We should expose the hook in js-sdk instead, obviously.
+     */
+    public static patchClientForEnvelopeTransforms(): void {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const proto = MatrixClient.prototype as any;
+
+        // Patch sendCompleteEvent to apply plaintext content transforms before
+        // encryption. This is the single funnel point for all event sends
+        // (messages, edits, media, stickers, etc.) and has a clean
+        // { roomId, eventObject: { type, content } } shape.
+        const originalSendComplete = proto.sendCompleteEvent;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        proto.sendCompleteEvent = function (this: MatrixClient, params: any) {
+            if (
+                params?.roomId &&
+                params?.eventObject?.content &&
+                ModuleApi._instance?.extras.eventContentTransformCallbacks.length
+            ) {
+                let content = params.eventObject.content;
+                for (const cb of ModuleApi._instance.extras.eventContentTransformCallbacks) {
+                    content = cb(params.roomId, content);
+                }
+                params.eventObject.content = content;
+            }
+            return originalSendComplete.call(this, params);
+        };
+
+        // Patch sendEventHttpRequest to apply envelope transforms after encryption.
+        const original = proto.sendEventHttpRequest;
+        proto.sendEventHttpRequest = function (
+            this: MatrixClient,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            event: any,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ...args: any[]
+        ) {
+            // If the event was encrypted and there are envelope transform callbacks, apply them
+            if (
+                event.isEncrypted?.() &&
+                event.getWireType?.() === EventType.RoomMessageEncrypted &&
+                ModuleApi._instance?.extras.encryptedEnvelopeTransformCallbacks.length
+            ) {
+                const roomId = event.getRoomId();
+                if (roomId) {
+                    let content = event.event.content;
+                    for (const cb of ModuleApi._instance.extras.encryptedEnvelopeTransformCallbacks) {
+                        content = cb(roomId, content);
+                    }
+                    event.event.content = content;
+                }
+            }
+            return original.call(this, event, ...args);
+        };
+
     }
 }
 
