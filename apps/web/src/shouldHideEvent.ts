@@ -67,6 +67,9 @@ export default function shouldHideEvent(ev: MatrixEvent, ctx?: IRoomState): bool
     // Hide replacement events since they update the original tile (if enabled)
     if (ev.isRelation(RelationType.Replace)) return true;
 
+    // Hide decryption failures if the user has opted to hide them
+    if (ev.isDecryptionFailure() && isEnabled("hideDecryptionFailures")) return true;
+
     const eventDiff = memberEventDiff(ev);
 
     if (eventDiff.isMemberEvent) {
