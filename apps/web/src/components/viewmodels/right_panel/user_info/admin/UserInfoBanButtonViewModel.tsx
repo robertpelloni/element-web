@@ -74,7 +74,11 @@ export const useBanButtonViewModel = (props: RoomAdminToolsProps): BanButtonStat
         const msc4333Config = cli.msc4333Moderation.getModerationConfigFor(props.room.roomId);
         if (msc4333Config && !isBanned) {
             const managementRoom = cli.getRoom(msc4333Config.managementRoomId);
-            commonProps["children"] = [<p key={1}>You are banning this user using {managementRoom?.name} (via {msc4333Config.botUserId}).</p>];
+            commonProps["children"] = [
+                <p key={1}>
+                    You are banning this user using {managementRoom?.name} (via {msc4333Config.botUserId}).
+                </p>,
+            ];
         }
 
         let finished: Promise<[success?: boolean, reason?: string, rooms?: Room[]]>;
@@ -132,7 +136,10 @@ export const useBanButtonViewModel = (props: RoomAdminToolsProps): BanButtonStat
                     return cli.unban(roomId, member.userId);
                 } else {
                     if (msc4333Config) {
-                        return cli.sendMessage(msc4333Config.managementRoomId, msc4333Config.banCommand.render(member.userId, roomId, reason || ""))
+                        return cli.sendMessage(
+                            msc4333Config.managementRoomId,
+                            msc4333Config.banCommand.render(member.userId, roomId, reason || ""),
+                        );
                     }
                     return cli.ban(roomId, member.userId, reason || undefined);
                 }

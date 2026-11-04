@@ -39,8 +39,7 @@ function ViewAllResults({ onClick }: { onClick?: () => void }): React.JSX.Elemen
                     transition: "background 0.1s",
                 }}
                 onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background =
-                        "var(--cpd-color-bg-subtle-secondary)";
+                    (e.currentTarget as HTMLButtonElement).style.background = "var(--cpd-color-bg-subtle-secondary)";
                 }}
                 onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.background = "none";
@@ -79,8 +78,7 @@ export function GlobalSearchDropdown({
                 background: "var(--cpd-color-bg-canvas-default)",
                 border: "1px solid var(--cpd-color-border-disabled)",
                 borderRadius: "12px",
-                boxShadow:
-                    "0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06)",
                 width: "480px",
                 overflow: "hidden",
             }}
@@ -92,11 +90,7 @@ export function GlobalSearchDropdown({
                     borderBottom: "1px solid var(--cpd-color-border-disabled)",
                 }}
             >
-                <ChatFilterBar
-                    filters={DROPDOWN_FILTERS}
-                    active={activeFilter}
-                    onChange={onFilterChange}
-                />
+                <ChatFilterBar filters={DROPDOWN_FILTERS} active={activeFilter} onChange={onFilterChange} />
             </div>
 
             {/* Recent searches (no query) */}
@@ -120,7 +114,11 @@ export function GlobalSearchDropdown({
                     {/* Rooms */}
                     <SearchSectionHeader type="Rooms" />
                     <SearchResultItem type="Room" name="Marketing" roomAddress="marketing:element.io" />
-                    <SearchResultItem type="Room" name="Marketing All-Hands" roomAddress="marketing-all-hands:element.io" />
+                    <SearchResultItem
+                        type="Room"
+                        name="Marketing All-Hands"
+                        roomAddress="marketing-all-hands:element.io"
+                    />
 
                     {/* Messages CTA */}
                     <SearchResultItem type="Message" label={`See messages for "${query}"`} />

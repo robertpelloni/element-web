@@ -60,7 +60,11 @@ interface ChatFilterBarProps {
     onChange?: (filter: SearchFilter) => void;
 }
 
-export function ChatFilterBar({ active = "All", filters = ALL_FILTERS, onChange }: ChatFilterBarProps): React.JSX.Element {
+export function ChatFilterBar({
+    active = "All",
+    filters = ALL_FILTERS,
+    onChange,
+}: ChatFilterBarProps): React.JSX.Element {
     const [current, setCurrent] = useState<SearchFilter>(active);
 
     const handleClick = (filter: SearchFilter): void => {

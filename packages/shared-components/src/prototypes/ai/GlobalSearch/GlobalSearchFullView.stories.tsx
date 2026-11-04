@@ -80,11 +80,7 @@ export function GlobalSearchFullView({
                 }}
             >
                 <div style={{ width: "100%", maxWidth: "720px" }}>
-                    <GlobalSearchField
-                        value={query}
-                        onChange={onQueryChange}
-                        onClear={() => onQueryChange?.("")}
-                    />
+                    <GlobalSearchField value={query} onChange={onQueryChange} onClear={() => onQueryChange?.("")} />
                 </div>
             </div>
 
@@ -116,75 +112,95 @@ export function GlobalSearchFullView({
                     gap: "var(--cpd-space-3x)",
                 }}
             >
-                <div style={{ width: "100%", maxWidth: "720px", display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}>
-                {/* People section */}
-                {showPeople && (
-                    <section aria-label="People" style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}>
-                        <SearchSectionHeader type="People" />
-                        {PEOPLE_RESULTS.map((p) => (
-                            <SearchResultCard
-                                key={p.userId}
-                                type="People"
-                                name={p.name}
-                                userId={p.userId}
-                                highlight={query}
-                                actionLabel="Message"
-                            />
-                        ))}
-                    </section>
-                )}
+                <div
+                    style={{
+                        width: "100%",
+                        maxWidth: "720px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "var(--cpd-space-3x)",
+                    }}
+                >
+                    {/* People section */}
+                    {showPeople && (
+                        <section
+                            aria-label="People"
+                            style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}
+                        >
+                            <SearchSectionHeader type="People" />
+                            {PEOPLE_RESULTS.map((p) => (
+                                <SearchResultCard
+                                    key={p.userId}
+                                    type="People"
+                                    name={p.name}
+                                    userId={p.userId}
+                                    highlight={query}
+                                    actionLabel="Message"
+                                />
+                            ))}
+                        </section>
+                    )}
 
-                {/* Rooms section */}
-                {showRooms && (
-                    <section aria-label="Rooms" style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}>
-                        <SearchSectionHeader type="Rooms" />
-                        {ROOM_RESULTS.map((r) => (
-                            <SearchResultCard
-                                key={r.roomAddress}
-                                type="Room"
-                                name={r.name}
-                                roomAddress={r.roomAddress}
-                                highlight={query}
-                                actionLabel="Open"
-                            />
-                        ))}
-                    </section>
-                )}
+                    {/* Rooms section */}
+                    {showRooms && (
+                        <section
+                            aria-label="Rooms"
+                            style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}
+                        >
+                            <SearchSectionHeader type="Rooms" />
+                            {ROOM_RESULTS.map((r) => (
+                                <SearchResultCard
+                                    key={r.roomAddress}
+                                    type="Room"
+                                    name={r.name}
+                                    roomAddress={r.roomAddress}
+                                    highlight={query}
+                                    actionLabel="Open"
+                                />
+                            ))}
+                        </section>
+                    )}
 
-                {/* Messages section */}
-                {showMessages && (
-                    <section aria-label="Messages" style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}>
-                        <SearchSectionHeader type="Rooms" />
-                        {MESSAGE_RESULTS.map((m) => (
-                            <SearchResultCard
-                                key={m.roomName + m.senderName}
-                                type="Message"
-                                roomName={m.roomName}
-                                senderName={m.senderName}
-                                messagePreview={m.messagePreview}
-                                highlight={query}
-                                actionLabel="Jump to"
-                            />
-                        ))}
-                    </section>
-                )}
+                    {/* Messages section */}
+                    {showMessages && (
+                        <section
+                            aria-label="Messages"
+                            style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}
+                        >
+                            <SearchSectionHeader type="Rooms" />
+                            {MESSAGE_RESULTS.map((m) => (
+                                <SearchResultCard
+                                    key={m.roomName + m.senderName}
+                                    type="Message"
+                                    roomName={m.roomName}
+                                    senderName={m.senderName}
+                                    messagePreview={m.messagePreview}
+                                    highlight={query}
+                                    actionLabel="Jump to"
+                                />
+                            ))}
+                        </section>
+                    )}
 
-                {/* Spaces section */}
-                {showSpaces && (
-                    <section aria-label="Spaces" style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}>
-                        <SearchSectionHeader type="Spaces" />
-                        {SPACE_RESULTS.map((s) => (
-                            <SearchResultCard
-                                key={s.spaceAddress}
-                                type="Space"
-                                name={s.name}
-                                spaceAddress={s.spaceAddress}
-                                highlight={query}
-                                actionLabel="View"
-                            />
-                        ))}
-                    </section>
-                )}
+                    {/* Spaces section */}
+                    {showSpaces && (
+                        <section
+                            aria-label="Spaces"
+                            style={{ display: "flex", flexDirection: "column", gap: "var(--cpd-space-3x)" }}
+                        >
+                            <SearchSectionHeader type="Spaces" />
+                            {SPACE_RESULTS.map((s) => (
+                                <SearchResultCard
+                                    key={s.spaceAddress}
+                                    type="Space"
+                                    name={s.name}
+                                    spaceAddress={s.spaceAddress}
+                                    highlight={query}
+                                    actionLabel="View"
+                                />
+                            ))}
+                        </section>
+                    )}
                 </div>
             </div>
         </div>
@@ -198,7 +214,15 @@ function InteractiveFullView(): React.JSX.Element {
     const [filter, setFilter] = useState<SearchFilter>("All");
 
     return (
-        <div style={{ width: "760px", height: "600px", border: "1px solid var(--cpd-color-border-disabled)", borderRadius: "12px", overflow: "hidden" }}>
+        <div
+            style={{
+                width: "760px",
+                height: "600px",
+                border: "1px solid var(--cpd-color-border-disabled)",
+                borderRadius: "12px",
+                overflow: "hidden",
+            }}
+        >
             <GlobalSearchFullView
                 query={query}
                 activeFilter={filter}

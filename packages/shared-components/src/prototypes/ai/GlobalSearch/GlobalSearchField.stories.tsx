@@ -35,7 +35,10 @@ export function GlobalSearchField({
     }
 
     return (
-        <Form.Root onSubmit={(e) => e.preventDefault()} style={{ position: "relative", width: "100%", maxWidth: "480px", margin: "0 auto" }}>
+        <Form.Root
+            onSubmit={(e) => e.preventDefault()}
+            style={{ position: "relative", width: "100%", maxWidth: "480px", margin: "0 auto" }}
+        >
             <Search
                 name="globalSearch"
                 placeholder={placeholder}
@@ -102,11 +105,7 @@ export const Interactive: Story = {
                     minWidth: "360px",
                 }}
             >
-                <GlobalSearchField
-                    value={value}
-                    onChange={setValue}
-                    onClear={() => setValue("")}
-                />
+                <GlobalSearchField value={value} onChange={setValue} onClear={() => setValue("")} />
                 <span style={{ font: "var(--cpd-font-body-sm-regular)", color: "var(--cpd-color-text-secondary)" }}>
                     {value ? `Query: "${value}"` : "No query yet"}
                 </span>

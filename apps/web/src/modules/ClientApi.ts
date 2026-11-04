@@ -4,7 +4,11 @@ Copyright 2025 Element Creations Ltd.
 SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
-import type { ClientApi as IClientApi, Room, MatrixEvent as ModuleMatrixEvent } from "@element-hq/element-web-module-api";
+import type {
+    ClientApi as IClientApi,
+    Room,
+    MatrixEvent as ModuleMatrixEvent,
+} from "@element-hq/element-web-module-api";
 import { Room as ModuleRoom } from "./models/Room";
 import { AccountDataApi } from "./AccountDataApi";
 import { MatrixClientPeg } from "../MatrixClientPeg";

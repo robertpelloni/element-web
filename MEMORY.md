@@ -1,6 +1,7 @@
 # Memory: Ongoing Observations & Preferences
 
 ## Codebase Observations
+
 - The project is a monorepo using `pnpm` (hoisted nodeLinker) and `nx`.
 - Transition to MVVM v2 is a core architectural goal, separating dumb views from observable ViewModels.
 - `shared-components` is the primary package for reusable UI components and design system integration.
@@ -10,6 +11,7 @@
 - `pnpm` requires `onlyBuiltDependencies: ["matrix-js-sdk"]` in root `package.json` to permit build scripts for git-hosted dependencies.
 
 ## Design Preferences
+
 - Favor arrow functions for class methods to ensure correct `this` binding.
 - Prefer `useViewModel` hook for subscribing to view models in React components.
 - Utilize `BaseViewModel` and disposables to manage resources and prevent memory leaks.
@@ -18,6 +20,7 @@
 - Ensure all backend capabilities have interactive frontend representations with descriptive tooltips.
 
 ## Workflow Preferences
+
 - Always synchronize with `upstream/develop`.
 - Intelligently merge feature branches, erring on the side of caution.
 - Increment version numbers for every release/build cycle and reference them in commit messages.

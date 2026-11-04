@@ -86,13 +86,7 @@ function HighlightedText({ text, highlight }: { text: string; highlight?: string
 
 // ── Card wrapper ──────────────────────────────────────────────────────────────
 
-function CardWrapper({
-    children,
-    onClick,
-}: {
-    children: React.ReactNode;
-    onClick?: () => void;
-}): React.JSX.Element {
+function CardWrapper({ children, onClick }: { children: React.ReactNode; onClick?: () => void }): React.JSX.Element {
     return (
         <div
             role="option"
@@ -110,8 +104,7 @@ function CardWrapper({
                 transition: "background 0.1s",
             }}
             onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.background =
-                    "var(--cpd-color-bg-subtle-secondary)";
+                (e.currentTarget as HTMLDivElement).style.background = "var(--cpd-color-bg-subtle-secondary)";
             }}
             onMouseLeave={(e) => {
                 (e.currentTarget as HTMLDivElement).style.background = "transparent";
@@ -167,7 +160,13 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
     if (props.type === "People") {
         return (
             <CardWrapper onClick={props.onClick}>
-                <Avatar id={props.userId || props.name} name={props.name} src={props.avatarUrl} size="36px" type="round" />
+                <Avatar
+                    id={props.userId || props.name}
+                    name={props.name}
+                    src={props.avatarUrl}
+                    size="36px"
+                    type="round"
+                />
                 <CardDetails primary={props.name} secondary={props.userId} highlight={props.highlight} />
             </CardWrapper>
         );
@@ -176,7 +175,13 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
     if (props.type === "Room") {
         return (
             <CardWrapper onClick={props.onClick}>
-                <Avatar id={props.roomAddress || props.name} name={props.name} src={props.avatarUrl} size="36px" type="round" />
+                <Avatar
+                    id={props.roomAddress || props.name}
+                    name={props.name}
+                    src={props.avatarUrl}
+                    size="36px"
+                    type="round"
+                />
                 <CardDetails primary={props.name} secondary={props.roomAddress} highlight={props.highlight} />
             </CardWrapper>
         );
@@ -185,7 +190,13 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
     if (props.type === "Space") {
         return (
             <CardWrapper onClick={props.onClick}>
-                <Avatar id={props.spaceAddress || props.name} name={props.name} src={props.avatarUrl} size="36px" type="square" />
+                <Avatar
+                    id={props.spaceAddress || props.name}
+                    name={props.name}
+                    src={props.avatarUrl}
+                    size="36px"
+                    type="square"
+                />
                 <CardDetails primary={props.name} secondary={props.spaceAddress} highlight={props.highlight} />
             </CardWrapper>
         );
@@ -194,10 +205,18 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
     // Message
     return (
         <CardWrapper onClick={props.onClick}>
-            <Avatar id={props.roomName || "room"} name={props.roomName || ""} src={props.avatarUrl} size="36px" type="round" />
+            <Avatar
+                id={props.roomName || "room"}
+                name={props.roomName || ""}
+                src={props.avatarUrl}
+                size="36px"
+                type="round"
+            />
             <div style={{ display: "flex", flexDirection: "column", minWidth: 0, flex: 1, gap: "var(--cpd-space-1x)" }}>
                 {/* Top row: room name + timestamp */}
-                <div style={{ display: "flex", alignItems: "baseline", gap: "var(--cpd-space-2x)", overflow: "hidden" }}>
+                <div
+                    style={{ display: "flex", alignItems: "baseline", gap: "var(--cpd-space-2x)", overflow: "hidden" }}
+                >
                     <span
                         style={{
                             font: "var(--cpd-font-body-md-semibold)",
@@ -216,7 +235,17 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
                             flexShrink: 0,
                         }}
                     >
-                        {props.timestamp ?? new Date().toLocaleString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).replace(",", "")}
+                        {props.timestamp ??
+                            new Date()
+                                .toLocaleString("en-GB", {
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: false,
+                                })
+                                .replace(",", "")}
                     </span>
                 </div>
                 {/* Bottom row: sender + message preview */}
@@ -229,7 +258,14 @@ export function SearchResultCard(props: SearchResultCardProps): React.JSX.Elemen
                         whiteSpace: "nowrap",
                     }}
                 >
-                    <span style={{ color: "var(--cpd-color-text-secondary)", fontWeight: "var(--cpd-font-weight-semibold)" }}>{props.senderName}: </span>
+                    <span
+                        style={{
+                            color: "var(--cpd-color-text-secondary)",
+                            fontWeight: "var(--cpd-font-weight-semibold)",
+                        }}
+                    >
+                        {props.senderName}:{" "}
+                    </span>
                     <HighlightedText text={props.messagePreview} highlight={props.highlight} />
                 </span>
             </div>
@@ -282,7 +318,16 @@ export const MessageCard: Story = {
         roomName: "Design",
         senderName: "Brenda",
         messagePreview: "This is a message that this user wrote at this particular time",
-        timestamp: new Date().toLocaleString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).replace(",", ""),
+        timestamp: new Date()
+            .toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            })
+            .replace(",", ""),
     },
     name: "Message",
 };
@@ -294,7 +339,16 @@ export const MessageCardHighlight: Story = {
         senderName: "Malo",
         messagePreview: "This is the message with the term being looked at",
         highlight: "term",
-        timestamp: new Date().toLocaleString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).replace(",", ""),
+        timestamp: new Date()
+            .toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+            })
+            .replace(",", ""),
     },
     name: "Message — with highlight",
 };
@@ -319,7 +373,16 @@ export const AllCards: Story = {
                 senderName="Malo"
                 messagePreview="This is the message with the term being looked at"
                 highlight="term"
-                timestamp={new Date().toLocaleString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).replace(",", "")}
+                timestamp={new Date()
+                    .toLocaleString("en-GB", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                    })
+                    .replace(",", "")}
             />
         </div>
     ),

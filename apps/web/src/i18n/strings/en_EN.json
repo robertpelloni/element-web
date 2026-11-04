@@ -3470,9 +3470,7 @@
         "m.poll.start": "%(senderName)s has started a poll - %(pollQuestion)s",
         "m.room.avatar": {
             "changed": "%(senderDisplayName)s changed the room avatar.",
-            "changed_img": "timeline|m.room.avatar|changed_img",
-            "lightbox_title": "%(senderDisplayName)s changed the avatar for %(roomName)s",
-            "removed": "timeline|m.room.avatar|removed"
+            "lightbox_title": "%(senderDisplayName)s changed the avatar for %(roomName)s"
         },
         "m.room.canonical_alias": {
             "alt_added": {

@@ -107,7 +107,7 @@ export class ModuleApi implements Api {
     /**
      * Patches MatrixClient.sendEventHttpRequest to apply encrypted envelope transforms.
      * Must be called once at startup.
-     * 
+     *
      * XXX: TODO: FIXME: this is a horrific workaround to avoid touching js-sdk
      * We should expose the hook in js-sdk instead, obviously.
      */
@@ -162,7 +162,6 @@ export class ModuleApi implements Api {
             }
             return original.call(this, event, ...args);
         };
-
     }
 }
 

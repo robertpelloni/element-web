@@ -5,7 +5,11 @@ SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Com
 Please see LICENSE files in the repository root for full details.
 */
 
-import { type Room as IRoom, type MatrixEvent as ModuleMatrixEvent, Watchable } from "@element-hq/element-web-module-api";
+import {
+    type Room as IRoom,
+    type MatrixEvent as ModuleMatrixEvent,
+    Watchable,
+} from "@element-hq/element-web-module-api";
 import { RoomEvent, type Room as SdkRoom } from "matrix-js-sdk/src/matrix";
 
 export class Room implements IRoom {

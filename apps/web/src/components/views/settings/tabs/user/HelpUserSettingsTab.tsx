@@ -85,8 +85,7 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
             <SettingsSubsection
                 heading={
                     <span>
-                        {_t("setting|help_about|project_documentation")}
-                        {" "}
+                        {_t("setting|help_about|project_documentation")}{" "}
                         <InfoTooltip
                             tooltip={_t("setting|help_about|project_resources_tooltip")}
                             title={_t("setting|help_about|project_documentation")}
@@ -96,20 +95,14 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
                 description={_t("setting|help_about|documentation_description")}
             >
                 <div className="mx_HelpUserSettingsTab_resources">
-                    <ExternalLink
-                        href="https://github.com/robertpelloni/element-web/tree/main/docs"
-                        kind="primary"
-                    >
+                    <ExternalLink href="https://github.com/robertpelloni/element-web/tree/main/docs" kind="primary">
                         {_t("setting|help_about|project_documentation")}
                     </ExternalLink>
                 </div>
                 <SettingsSubsectionText>
                     {_t("setting|help_about|repository_description")}
                     <br />
-                    <ExternalLink
-                        href="https://github.com/robertpelloni/element-web"
-                        kind="primary"
-                    >
+                    <ExternalLink href="https://github.com/robertpelloni/element-web" kind="primary">
                         {_t("setting|help_about|source_repository")}
                     </ExternalLink>
                 </SettingsSubsectionText>
@@ -122,8 +115,7 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
             <SettingsSubsection
                 heading={
                     <span>
-                        {_t("setting|help_about|runtime_environment")}
-                        {" "}
+                        {_t("setting|help_about|runtime_environment")}{" "}
                         <InfoTooltip
                             tooltip={_t("setting|help_about|runtime_environment_tooltip")}
                             title={_t("setting|help_about|runtime_environment")}
@@ -132,9 +124,7 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
                 }
                 description={_t("setting|help_about|runtime_environment_description")}
             >
-                <SettingsSubsectionText>
-                    {_t("setting|help_about|system_tray_info")}
-                </SettingsSubsectionText>
+                <SettingsSubsectionText>{_t("setting|help_about|system_tray_info")}</SettingsSubsectionText>
             </SettingsSubsection>
         );
     }

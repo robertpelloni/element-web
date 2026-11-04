@@ -50,22 +50,11 @@ interface RecentItemProps extends BaseSearchResultItemProps {
     label: string;
 }
 
-type SearchResultItemProps =
-    | PeopleItemProps
-    | RoomItemProps
-    | SpaceItemProps
-    | MessageItemProps
-    | RecentItemProps;
+type SearchResultItemProps = PeopleItemProps | RoomItemProps | SpaceItemProps | MessageItemProps | RecentItemProps;
 
 // ── Shared row wrapper ────────────────────────────────────────────────────────
 
-function ResultRow({
-    children,
-    onClick,
-}: {
-    children: React.ReactNode;
-    onClick?: () => void;
-}): React.JSX.Element {
+function ResultRow({ children, onClick }: { children: React.ReactNode; onClick?: () => void }): React.JSX.Element {
     return (
         <div
             role="option"
@@ -82,8 +71,7 @@ function ResultRow({
                 transition: "background 0.1s",
             }}
             onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.background =
-                    "var(--cpd-color-bg-subtle-secondary)";
+                (e.currentTarget as HTMLDivElement).style.background = "var(--cpd-color-bg-subtle-secondary)";
             }}
             onMouseLeave={(e) => {
                 (e.currentTarget as HTMLDivElement).style.background = "transparent";
@@ -94,13 +82,7 @@ function ResultRow({
     );
 }
 
-function ResultDetails({
-    primary,
-    secondary,
-}: {
-    primary: string;
-    secondary?: string;
-}): React.JSX.Element {
+function ResultDetails({ primary, secondary }: { primary: string; secondary?: string }): React.JSX.Element {
     return (
         <div style={{ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 }}>
             <span
@@ -137,13 +119,7 @@ export function SearchResultItem(props: SearchResultItemProps): React.JSX.Elemen
     if (props.type === "People") {
         return (
             <ResultRow onClick={props.onClick}>
-                <Avatar
-                    id={props.userId}
-                    name={props.name}
-                    src={props.avatarUrl}
-                    size="32px"
-                    type="round"
-                />
+                <Avatar id={props.userId} name={props.name} src={props.avatarUrl} size="32px" type="round" />
                 <ResultDetails primary={props.name} secondary={props.userId} />
             </ResultRow>
         );
@@ -152,13 +128,7 @@ export function SearchResultItem(props: SearchResultItemProps): React.JSX.Elemen
     if (props.type === "Room") {
         return (
             <ResultRow onClick={props.onClick}>
-                <Avatar
-                    id={props.roomAddress}
-                    name={props.name}
-                    src={props.avatarUrl}
-                    size="32px"
-                    type="square"
-                />
+                <Avatar id={props.roomAddress} name={props.name} src={props.avatarUrl} size="32px" type="square" />
                 <ResultDetails primary={props.name} secondary={props.roomAddress} />
             </ResultRow>
         );
@@ -167,13 +137,7 @@ export function SearchResultItem(props: SearchResultItemProps): React.JSX.Elemen
     if (props.type === "Space") {
         return (
             <ResultRow onClick={props.onClick}>
-                <Avatar
-                    id={props.spaceAddress}
-                    name={props.name}
-                    src={props.avatarUrl}
-                    size="32px"
-                    type="square"
-                />
+                <Avatar id={props.spaceAddress} name={props.name} src={props.avatarUrl} size="32px" type="square" />
                 <ResultDetails primary={props.name} secondary={props.spaceAddress} />
             </ResultRow>
         );
@@ -231,7 +195,7 @@ export const SpaceResult: Story = {
 export const MessageResult: Story = {
     args: {
         type: "Message",
-        label: 'See messages for \u201cdesign review\u201d',
+        label: "See messages for \u201cdesign review\u201d",
     },
     name: "Message (CTA)",
 };
@@ -258,7 +222,7 @@ export const AllTypes: Story = {
             <SearchResultItem type="People" name="Malo Jaffré" userId="@malo:element.io" />
             <SearchResultItem type="Room" name="Marketing" roomAddress="marketing:element.io" />
             <SearchResultItem type="Space" name="Marketing Department" spaceAddress="#marketing:element.io" />
-            <SearchResultItem type="Message" label={'See messages for \u201cdesign review\u201d'} />
+            <SearchResultItem type="Message" label={"See messages for \u201cdesign review\u201d"} />
             <SearchResultItem type="Recent" label="design review" />
         </div>
     ),
