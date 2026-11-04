@@ -22,6 +22,7 @@ import { SettingsSubsection, SettingsSubsectionText } from "../../shared/Setting
 import ExternalLink from "../../../elements/ExternalLink";
 import MatrixClientContext from "../../../../../contexts/MatrixClientContext";
 import { BugReportDialogButton } from "../../../elements/BugReportDialogButton";
+import InfoTooltip from "../../../elements/InfoTooltip";
 
 interface IState {
     appVersion: string | null;
@@ -82,7 +83,16 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
     private renderProjectResources(): ReactNode {
         return (
             <SettingsSubsection
-                heading={_t("setting|help_about|project_documentation")}
+                heading={
+                    <span>
+                        {_t("setting|help_about|project_documentation")}
+                        {" "}
+                        <InfoTooltip
+                            tooltip={_t("setting|help_about|project_resources_tooltip")}
+                            title={_t("setting|help_about|project_documentation")}
+                        />
+                    </span>
+                }
                 description={_t("setting|help_about|documentation_description")}
             >
                 <div className="mx_HelpUserSettingsTab_resources">
@@ -102,6 +112,28 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
                     >
                         {_t("setting|help_about|source_repository")}
                     </ExternalLink>
+                </SettingsSubsectionText>
+            </SettingsSubsection>
+        );
+    }
+
+    private renderSystemTrayAndRuntimeInfo(): ReactNode {
+        return (
+            <SettingsSubsection
+                heading={
+                    <span>
+                        {_t("setting|help_about|runtime_environment")}
+                        {" "}
+                        <InfoTooltip
+                            tooltip={_t("setting|help_about|runtime_environment_tooltip")}
+                            title={_t("setting|help_about|runtime_environment")}
+                        />
+                    </span>
+                }
+                description={_t("setting|help_about|runtime_environment_description")}
+            >
+                <SettingsSubsectionText>
+                    {_t("setting|help_about|system_tray_info")}
                 </SettingsSubsectionText>
             </SettingsSubsection>
         );
@@ -291,6 +323,7 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
                         </SettingsSubsectionText>
                     </SettingsSubsection>
                     {this.renderProjectResources()}
+                    {this.renderSystemTrayAndRuntimeInfo()}
                     {this.renderLegal()}
                     {this.renderCredits()}
                     <SettingsSubsection heading={_t("common|advanced")}>

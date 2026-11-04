@@ -48,9 +48,10 @@
         "yaml": "^2.3.3"
     },
     "pnpm": {
-        "onlyBuiltDependencies": [],
+        "onlyBuiltDependencies": [
+            "matrix-js-sdk"
+        ],
         "ignoredBuiltDependencies": [
-            "matrix-js-sdk",
             "@sentry/cli",
             "nx"
         ],
