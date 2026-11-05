@@ -98,7 +98,8 @@ export class RoomListSectionHeaderViewModel
      * @param rooms - The rooms currently in this section
      */
     public setRooms(rooms: Room[]): void {
-        const newStates = new Set(rooms.map((room) => RoomNotificationStateStore.instance.getRoomState(room)));
+        const validRooms = (rooms || []).filter((room): room is Room => Boolean(room?.roomId));
+        const newStates = new Set(validRooms.map((room) => RoomNotificationStateStore.instance.getRoomState(room)));
 
         // Unsubscribe from rooms no longer in the section
         for (const state of this.roomNotificationStates) {
