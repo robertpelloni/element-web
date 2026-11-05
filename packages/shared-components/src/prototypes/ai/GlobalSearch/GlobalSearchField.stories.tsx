@@ -8,6 +8,7 @@
 import React, { useState } from "react";
 import { Search, Form, IconButton } from "@vector-im/compound-web";
 import CloseIcon from "@vector-im/compound-design-tokens/assets/web/icons/close";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -112,5 +113,4 @@ export const Interactive: Story = {
             </div>
         );
     },
-    name: "Interactive",
 };

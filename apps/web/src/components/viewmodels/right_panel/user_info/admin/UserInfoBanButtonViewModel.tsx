@@ -71,7 +71,7 @@ export const useBanButtonViewModel = (props: RoomAdminToolsProps): BanButtonStat
             children: [] as ReactNode,
         };
 
-        const msc4333Config = cli.msc4333Moderation.getModerationConfigFor(props.room.roomId);
+        const msc4333Config = (cli as any).msc4333Moderation?.getModerationConfigFor(props.room.roomId);
         if (msc4333Config && !isBanned) {
             const managementRoom = cli.getRoom(msc4333Config.managementRoomId);
             commonProps["children"] = [

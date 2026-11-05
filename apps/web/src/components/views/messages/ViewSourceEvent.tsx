@@ -71,7 +71,7 @@ export default class ViewSourceEvent extends React.PureComponent<IProps, IState>
                 {content}
                 <AccessibleButton
                     kind="link"
-                    title={_t("devtools|toggle_event")}
+                    title={_t("devtools|toggle_event" as any)}
                     className="mx_ViewSourceEvent_toggle"
                     onClick={this.onToggle}
                 >

@@ -29,6 +29,10 @@ export interface MatrixEvent {
      */
     content: Record<string, unknown>;
     /**
+     * The original encrypted content of the event, or undefined if not encrypted.
+     */
+    wireContent?: Record<string, unknown>;
+    /**
      * Contains optional extra information about the event.
      */
     unsigned: Record<string, unknown>;

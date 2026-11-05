@@ -7,8 +7,8 @@
 
 import React, { type JSX } from "react";
 import { Button } from "@vector-im/compound-web";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import styles from "./FigmaPrototypeSandbox.module.css";
 
 type StepData = {
@@ -76,7 +76,7 @@ function StepCard({ step, isLast }: { step: StepData; isLast: boolean }): JSX.El
                             target="_blank"
                             rel="noopener noreferrer"
                             kind="secondary"
-                            size="sm"
+                            size="md"
                         >
                             {step.action.label} ↗
                         </Button>

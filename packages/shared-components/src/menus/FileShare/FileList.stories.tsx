@@ -18,7 +18,6 @@ const FileListWrapperImpl = (snapshot: FileShareViewSnapshot): JSX.Element => {
         onFileSelected: fn(),
         setCurrentDirectory: fn(),
         setFileViewSetting: fn(),
-        loadFiles: fn(),
         getThumbnailForFile: async () => null,
         goBackDirectory: fn(),
     });

@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -113,11 +114,13 @@ export const Active: Story = {
 };
 
 export const AllChips: Story = {
+    args: { label: "All" },
     render: () => <ChatFilterBar />,
     name: "Filter Bar (all chips)",
 };
 
 export const PeopleActive: Story = {
+    args: { label: "People", active: true },
     render: () => <ChatFilterBar active="People" />,
     name: "Filter Bar — People active",
 };

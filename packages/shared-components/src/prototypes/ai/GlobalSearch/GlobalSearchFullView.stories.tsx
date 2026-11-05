@@ -6,8 +6,8 @@
  */
 
 import React, { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GlobalSearchField } from "./GlobalSearchField.stories";
 import { ChatFilterBar, type SearchFilter } from "./ChatFilterChip.stories";
 import { SearchSectionHeader } from "./SearchSectionHeader.stories";
@@ -135,7 +135,6 @@ export function GlobalSearchFullView({
                                     name={p.name}
                                     userId={p.userId}
                                     highlight={query}
-                                    actionLabel="Message"
                                 />
                             ))}
                         </section>
@@ -155,7 +154,6 @@ export function GlobalSearchFullView({
                                     name={r.name}
                                     roomAddress={r.roomAddress}
                                     highlight={query}
-                                    actionLabel="Open"
                                 />
                             ))}
                         </section>
@@ -176,7 +174,6 @@ export function GlobalSearchFullView({
                                     senderName={m.senderName}
                                     messagePreview={m.messagePreview}
                                     highlight={query}
-                                    actionLabel="Jump to"
                                 />
                             ))}
                         </section>
@@ -196,7 +193,6 @@ export function GlobalSearchFullView({
                                     name={s.name}
                                     spaceAddress={s.spaceAddress}
                                     highlight={query}
-                                    actionLabel="View"
                                 />
                             ))}
                         </section>
@@ -272,6 +268,5 @@ export const SpacesFilter: Story = {
 
 export const Interactive: Story = {
     render: () => <InteractiveFullView />,
-    name: "Interactive",
     parameters: { layout: "centered" },
 };

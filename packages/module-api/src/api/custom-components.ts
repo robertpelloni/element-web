@@ -19,6 +19,11 @@ export type CustomMessageComponentProps = {
      * @alpha
      */
     mxEvent: MatrixEvent;
+    /**
+     * Whether this component is inside a reply tile.
+     * @alpha
+     */
+    isReplyTile?: boolean;
 };
 
 /**

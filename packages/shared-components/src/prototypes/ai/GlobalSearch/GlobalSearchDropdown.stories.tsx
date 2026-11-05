@@ -6,8 +6,8 @@
  */
 
 import React, { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ChatFilterBar, type SearchFilter } from "./ChatFilterChip.stories";
 import { GlobalSearchField } from "./GlobalSearchField.stories";
 import { SearchSectionHeader } from "./SearchSectionHeader.stories";

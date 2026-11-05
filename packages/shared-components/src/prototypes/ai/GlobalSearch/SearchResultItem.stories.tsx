@@ -7,8 +7,8 @@
 
 import React from "react";
 import { Avatar } from "@vector-im/compound-web";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SearchTypeIcon, type SearchResultType } from "./SearchTypeIcon.stories";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -58,6 +58,7 @@ function ResultRow({ children, onClick }: { children: React.ReactNode; onClick?:
     return (
         <div
             role="option"
+            aria-selected={false}
             tabIndex={0}
             onClick={onClick}
             onKeyDown={(e) => e.key === "Enter" && onClick?.()}
@@ -209,6 +210,7 @@ export const RecentResult: Story = {
 };
 
 export const AllTypes: Story = {
+    args: { type: "People", name: "Malo Jaffré", userId: "@malo:element.io" },
     render: () => (
         <div
             style={{

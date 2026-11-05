@@ -84,3 +84,24 @@ export interface ExtrasApi {
      */
     addRoomHeaderButtonCallback(cb: RoomHeaderButtonsCallback): void;
 }
+
+/**
+ * @alpha
+ */
+export type RoomBannerCallback = (roomId: string) => JSX.Element | null;
+/**
+ * @alpha
+ */
+export type ComposerLeftComponentCallback = (roomId: string) => JSX.Element | null;
+/**
+ * @alpha
+ */
+export type EventContentTransformCallback = (roomId: string, content: any) => any;
+/**
+ * @alpha
+ */
+export type EncryptedEnvelopeTransformCallback = (roomId: string, content: any) => any;
+/**
+ * @alpha
+ */
+export type RoomSettingsSecurityCallback = (roomId: string) => JSX.Element | null;

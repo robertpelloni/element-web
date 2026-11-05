@@ -35,9 +35,11 @@ export default {
                 "src/hooks/useLocalStorageState.ts",
                 "src/@types/commonmark.ts",
                 "src/components/views/messages/MJitsiWidgetEvent.tsx",
+                "src/components/views/messages/RoomAvatarEvent.tsx",
                 "src/components/views/messages/ViewSourceEvent.tsx",
             ],
             ignoreDependencies: [
+                "geojson",
                 // False positive
                 "sw.js",
                 // Used by webpack
@@ -65,7 +67,8 @@ export default {
         },
         ".": {
             entry: ["scripts/**", "docs/**"],
-            ignore: [".devcontainer/storybook-launcher/**"],
+            ignore: [".devcontainer/**"],
+            ignoreBinaries: ["build-stats", "diff-i18n"],
         },
     },
     ignoreExportsUsedInFile: true,

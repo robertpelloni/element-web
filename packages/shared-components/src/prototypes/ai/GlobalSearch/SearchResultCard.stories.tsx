@@ -7,6 +7,7 @@
 
 import React from "react";
 import { Avatar } from "@vector-im/compound-web";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -90,6 +91,7 @@ function CardWrapper({ children, onClick }: { children: React.ReactNode; onClick
     return (
         <div
             role="option"
+            aria-selected={false}
             tabIndex={0}
             onClick={onClick}
             onKeyDown={(e) => e.key === "Enter" && onClick?.()}
@@ -354,6 +356,7 @@ export const MessageCardHighlight: Story = {
 };
 
 export const AllCards: Story = {
+    args: { type: "People", name: "Malo Jaffré", userId: "@malo:element.io" },
     render: () => (
         <div
             style={{

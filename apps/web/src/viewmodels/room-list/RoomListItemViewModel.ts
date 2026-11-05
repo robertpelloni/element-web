@@ -41,8 +41,6 @@ import { type Call, CallEvent } from "../../models/Call";
 import RoomListStoreV3 from "../../stores/room-list-v3/RoomListStoreV3";
 import { getCustomSectionData, isDefaultSectionTag } from "../../stores/room-list-v3/section";
 import { _t } from "../../languageHandler";
-import SpaceStore from "../../stores/spaces/SpaceStore";
-import { MetaSpace } from "../../stores/spaces";
 
 interface RoomItemProps {
     room: Room;

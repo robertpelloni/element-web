@@ -5,7 +5,7 @@
  * Please see LICENSE files in the repository root for full details.
  */
 
-import { BaseViewModel, CallType, type CallStartedTileViewSnapshot } from "@element-hq/web-shared-components";
+import { BaseViewModel, CallType, type CallTileViewSnapshot } from "@element-hq/web-shared-components";
 
 import type { MatrixEvent } from "matrix-js-sdk/src/matrix";
 import type { IRTCNotificationContent } from "matrix-js-sdk/src/matrixrtc";
@@ -20,7 +20,7 @@ export interface CallStartedTileViewModelProps {
     mxEvent: MatrixEvent;
 }
 
-function getIntentFromEvent(event: MatrixEvent): CallStartedTileViewSnapshot["type"] {
+function getIntentFromEvent(event: MatrixEvent): CallTileViewSnapshot["type"] {
     const content = event.getContent<IRTCNotificationContent>();
     const intentInContent = content["m.call.intent"];
     switch (intentInContent) {
@@ -32,7 +32,7 @@ function getIntentFromEvent(event: MatrixEvent): CallStartedTileViewSnapshot["ty
     }
 }
 
-function getTimeFromEvent(event: MatrixEvent, showTwelveHour: boolean): CallStartedTileViewSnapshot["timestamp"] {
+function getTimeFromEvent(event: MatrixEvent, showTwelveHour: boolean): CallTileViewSnapshot["timestamp"] {
     const content = event.getContent<IRTCNotificationContent>();
     const senderTs = content["sender_ts"];
     const originServerTs = event.getTs();
@@ -43,7 +43,7 @@ function getTimeFromEvent(event: MatrixEvent, showTwelveHour: boolean): CallStar
     return timestamp;
 }
 
-function getInitialSnapshot(event: MatrixEvent): CallStartedTileViewSnapshot {
+function getInitialSnapshot(event: MatrixEvent): CallTileViewSnapshot {
     const type = getIntentFromEvent(event);
     const showTwelveHour = SettingsStore.getValue("showTwelveHourTimestamps");
     const timestamp = getTimeFromEvent(event, showTwelveHour);
@@ -57,10 +57,7 @@ function isSettingsChangedPayload(payload: ActionPayload): payload is SettingUpd
 /**
  * ViewModel for a timeline tile that indicates the start of an element call.
  */
-export class CallStartedTileViewModel extends BaseViewModel<
-    CallStartedTileViewSnapshot,
-    CallStartedTileViewModelProps
-> {
+export class CallStartedTileViewModel extends BaseViewModel<CallTileViewSnapshot, CallStartedTileViewModelProps> {
     public constructor(props: CallStartedTileViewModelProps) {
         super(props, getInitialSnapshot(props.mxEvent));
         SettingsStore.monitorSetting("showTwelveHourTimestamps", null);
