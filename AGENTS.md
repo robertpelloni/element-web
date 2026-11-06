@@ -38,3 +38,7 @@ The ultimate vision for this project is to be "Outstanding! Magnificent! Insanel
 - **Arrow Functions**: Use arrow functions for class methods to ensure correct `this` binding.
 - **Accessibility**: Maintain high AX compliance. All features must be well-represented in the UI with labels, descriptions, and tooltips.
 - **Subagents**: Use subagents if possible to implement features in parallel.
+- **Node Memory Allocation**: Monorepo-wide ESLint checks (`pnpm -r --if-present run lint:js`) require `NODE_OPTIONS="--max-old-space-size=8192"` to avoid V8 heap allocation crashes.
+- **TypeScript 6 Extension Stems**: Never create `.ts` and `.tsx` files sharing the identical base filename in the same folder (e.g. `Foo-test.ts` and `Foo-test.tsx`). TypeScript 6 drops the `.tsx` from file matching unless explicitly specified in `files`, which triggers ESLint `parserOptions.project` missing file errors.
+- **Module API Documentation Sync**: When changing public models in `packages/module-api/src/models/`, run `pnpm exec nx build @element-hq/element-web-module-api` and sync changes to `packages/module-api/element-web-module-api.api.md`.
+- **Timeline Window Mocking**: When mocking a Room for `TimelineWindow` in unit tests, `room.getLiveTimeline()` must return an object with a `getTimelineSet()` method that provides a `room` event emitter (`on`/`off`) and `getLiveTimeline()`.
