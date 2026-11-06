@@ -4,7 +4,7 @@
 
 - [x] **Decryption Failure Hiding**: Implement hiding of events that fail to decrypt instead of showing error placeholders (Revisit https://github.com/element-hq/element-meta/issues/2449).
 - [x] **Native Module Docs**: Complete Linux and OS X setup instructions in `docs/native-node-modules.md`.
-- [ ] **Version Synchronization**: Ensure all `package.json` files and documentation refer to the single source of truth in `VERSION.md`.
+- [x] **Version Synchronization**: Ensure all `package.json` files and documentation refer to the single source of truth in `VERSION.md`.
 - [x] **Feature Branch Audit**: Review and merge remaining robertpelloni-specific feature branches.
 - [ ] **Accessibility Audit**: Conduct a comprehensive accessibility audit of the new room list and navigation landmarks.
 
