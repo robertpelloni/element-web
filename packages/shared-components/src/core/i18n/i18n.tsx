@@ -279,6 +279,8 @@ export function substitute(text: string, variables?: IVariables, tags?: Tags): s
  *
  * @return a React <span> component if any non-strings were used in substitutions, otherwise a string
  */
+const regexCache = new Map<string, RegExp>();
+
 export function replaceByRegexes(text: string, mapping: IVariables): string;
 export function replaceByRegexes(text: string, mapping: Tags): React.ReactNode;
 export function replaceByRegexes(text: string, mapping: IVariables | Tags): string | React.ReactNode {
@@ -290,8 +292,12 @@ export function replaceByRegexes(text: string, mapping: IVariables | Tags): stri
     let shouldWrapInSpan = false;
 
     for (const regexpString in mapping) {
-        // TODO: Cache regexps
-        const regexp = new RegExp(regexpString, "g");
+        let regexp = regexCache.get(regexpString);
+        if (!regexp) {
+            regexp = new RegExp(regexpString, "g");
+            regexCache.set(regexpString, regexp);
+        }
+        regexp.lastIndex = 0;
 
         // Loop over what output we have so far and perform replacements
         // We look for matches: if we find one, we get three parts: everything before the match, the replaced part,
