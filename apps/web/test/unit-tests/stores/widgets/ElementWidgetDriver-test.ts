@@ -933,8 +933,24 @@ describe("ElementWidgetDriver", () => {
 
         beforeEach(() => {
             driver = mkDefaultDriver();
+            const mockTimelineSet = {
+                room: { on: jest.fn(), off: jest.fn() },
+                getLiveTimeline: () => mockTimeline,
+                getTimelineForEvent: () => mockTimeline,
+            };
+            const mockTimeline: any = {
+                getEvents: () => [event1, event2],
+                getTimelineSet: () => mockTimelineSet,
+                getBaseIndex: () => 0,
+                getState: () => undefined,
+                getPaginationToken: () => null,
+                setPaginationToken: () => {},
+                getNeighbouringTimeline: () => null,
+            };
             client.getRoom.mockReturnValue({
-                getLiveTimeline: () => ({ getEvents: () => [event1, event2] }),
+                client,
+                getLiveTimeline: () => mockTimeline,
+                getUnfilteredTimelineSet: () => mockTimelineSet,
             } as unknown as Room);
         });
 

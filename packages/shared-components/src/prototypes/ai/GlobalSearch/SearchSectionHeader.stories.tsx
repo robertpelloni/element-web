@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -64,6 +65,7 @@ export const Rooms: Story = { args: { type: "Rooms" } };
 export const Spaces: Story = { args: { type: "Spaces" } };
 
 export const AllHeaders: Story = {
+    args: { type: "Suggestions" },
     render: () => (
         <div
             style={{

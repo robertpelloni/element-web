@@ -125,6 +125,9 @@ export type ComposerApiTarget = {
     view: "thread";
 };
 
+// @alpha (undocumented)
+export type ComposerLeftComponentCallback = (roomId: string) => JSX.Element | null;
+
 // @public
 export interface Config {
     // (undocumented)
@@ -177,6 +180,7 @@ export type CustomLoginRenderFunction = ExtendablePropsRenderFunction<CustomLogi
 // @alpha
 export type CustomMessageComponentProps = {
     mxEvent: MatrixEvent;
+    isReplyTile?: boolean;
 };
 
 // @alpha
@@ -231,6 +235,12 @@ export interface DirectoryCustomisations {
     // (undocumented)
     requireCanonicalAliasAccessToPublish?(): boolean;
 }
+
+// @alpha (undocumented)
+export type EncryptedEnvelopeTransformCallback = (roomId: string, content: any) => any;
+
+// @alpha (undocumented)
+export type EventContentTransformCallback = (roomId: string, content: any) => any;
 
 // @alpha
 export type ExtendablePropsRenderFunction<BaseProps> = <P extends BaseProps>(
@@ -308,6 +318,7 @@ export interface MatrixEvent {
     stateKey?: string;
     type: string;
     unsigned: Record<string, unknown>;
+    wireContent?: Record<string, unknown>;
 }
 
 // @public
@@ -434,6 +445,9 @@ export interface Room {
     name: Watchable<string>;
 }
 
+// @alpha (undocumented)
+export type RoomBannerCallback = (roomId: string) => JSX.Element | null;
+
 // @alpha
 export type RoomHeaderButtonsCallback = (roomId: string) => JSX.Element | undefined;
 
@@ -447,6 +461,9 @@ export interface RoomListStoreApi {
     getRooms(): Watchable<Room[]>;
     waitForReady(): Promise<void>;
 }
+
+// @alpha (undocumented)
+export type RoomSettingsSecurityCallback = (roomId: string) => JSX.Element | null;
 
 // @alpha
 export interface RoomViewProps {

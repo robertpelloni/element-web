@@ -24,11 +24,7 @@ function ElementLogo(): React.JSX.Element {
                 gap: "var(--cpd-space-2x)",
             }}
         >
-            <img
-                src={logomarkUrl}
-                alt="Element"
-                style={{ width: "32px", height: "32px", display: "block" }}
-            />
+            <img src={logomarkUrl} alt="Element" style={{ width: "32px", height: "32px", display: "block" }} />
             <span
                 style={{
                     color: "var(--cpd-color-text-primary)",
@@ -127,7 +123,16 @@ function TopBar({
             </div>
 
             {/* Centre: Search */}
-            <div style={{ flex: 1, minWidth: 0, maxWidth: "480px", margin: "0 auto", display: "flex", alignItems: "center" }}>
+            <div
+                style={{
+                    flex: 1,
+                    minWidth: 0,
+                    maxWidth: "480px",
+                    margin: "0 auto",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
                 <input
                     type="search"
                     placeholder={searchPlaceholder}
@@ -147,16 +152,17 @@ function TopBar({
             </div>
 
             {/* Right: Branded pill + Avatar */}
-            <div style={{ display: "flex", alignItems: "center", gap: "var(--cpd-space-3x)", flexShrink: 0, marginLeft: "auto" }}>
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--cpd-space-3x)",
+                    flexShrink: 0,
+                    marginLeft: "auto",
+                }}
+            >
                 <BrandedPill />
-                <Avatar
-                    id={userId}
-                    name={userName}
-                    src={avatarUrl}
-                    size="32px"
-                    type="round"
-                    onClick={() => {}}
-                />
+                <Avatar id={userId} name={userName} src={avatarUrl} size="32px" type="round" onClick={() => {}} />
             </div>
         </header>
     );

@@ -261,6 +261,21 @@ describe("RoomListSectionHeaderViewModel", () => {
             expect(vm.getSnapshot().isUnread).toBe(true);
         });
 
+        it("should safely handle nullish or sparse rooms in setRooms", () => {
+            const vm = new RoomListSectionHeaderViewModel({
+                tag: "m.favourite",
+                title: "Favourites",
+                spaceId: "!space:server",
+                onToggleExpanded,
+            });
+
+            expect(() => {
+                vm.setRooms([room, null as any, undefined as any]);
+            }).not.toThrow();
+
+            expect(vm.getSnapshot().isUnread).toBe(false);
+        });
+
         it("should subscribe to new rooms and unsubscribe from removed rooms", () => {
             const room2 = mkRoom(matrixClient, "!room2:server");
             const notificationState2 = new RoomNotificationState(room2, false);

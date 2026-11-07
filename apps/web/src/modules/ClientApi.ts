@@ -4,7 +4,11 @@ Copyright 2025 Element Creations Ltd.
 SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
-import type { ClientApi as IClientApi, Room, MatrixEvent as ModuleMatrixEvent } from "@element-hq/element-web-module-api";
+import type {
+    ClientApi as IClientApi,
+    Room,
+    MatrixEvent as ModuleMatrixEvent,
+} from "@element-hq/element-web-module-api";
 import { Room as ModuleRoom } from "./models/Room";
 import { AccountDataApi } from "./AccountDataApi";
 import { MatrixClientPeg } from "../MatrixClientPeg";
@@ -34,7 +38,7 @@ export class ClientApi implements IClientApi {
         stateKey: string = "",
     ): Promise<void> {
         const client = MatrixClientPeg.safeGet();
-        await client.sendStateEvent(roomId, eventType, content, stateKey);
+        await client.sendStateEvent(roomId, eventType as any, content, stateKey);
     }
 
     public stateEventListeners: Array<(event: ModuleMatrixEvent) => void> = [];
@@ -50,6 +54,7 @@ export class ClientApi implements IClientApi {
     public async downloadMxc(mxcUrl: string): Promise<string> {
         const client = MatrixClientPeg.safeGet();
         // useAuthentication=true produces the authenticated /_matrix/client/v1/media/download URL
+        // eslint-disable-next-line no-restricted-properties
         const httpUrl = client.mxcUrlToHttp(mxcUrl, undefined, undefined, undefined, false, true);
         if (!httpUrl) throw new Error(`Cannot resolve mxc URL: ${mxcUrl}`);
         const accessToken = client.getAccessToken();

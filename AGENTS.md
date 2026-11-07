@@ -1,9 +1,11 @@
 # Universal LLM Instructions & Core Directives
 
 ## Foundational Philosophy
+
 The ultimate vision for this project is to be "Outstanding! Magnificent! Insanely Great!!!". Do not stop until all planned features are 100% implemented in full detail, extremely robust, and well-documented.
 
 ## Core Directives
+
 - **Autonomous Evolution**: Actively analyze, assess, and proceed with implementation autonomously. Complete a feature, commit/push, and continue development without stopping for confirmation unless truly blocked or ambiguous.
 - **Extreme Detail**: Document all input information in comprehensive, thorough, FULL extreme detail. When summarizing, pay very close attention to specific details provided by the user.
 - **Verification**: Always verify work using read-only tools after any modification. Practice proactive testing; run relevant tests for every change.
@@ -12,6 +14,7 @@ The ultimate vision for this project is to be "Outstanding! Magnificent! Insanel
 - **Universal LLM Instructions**: This file serves as the master LLM instructions. Model-specific files (`CLAUDE.md`, `GEMINI.md`, `GPT.md`) should reference this file and append model-specific proprietary instructions.
 
 ## Project Management & Versioning
+
 - **Single Source of Truth**: `VERSION.md` is the absolute source of truth for the version number. All other references (e.g., `package.json`) must be synchronized with it.
 - **Version Bumps**: Every build should have a new version number. Bumps must be referenced in the git commit message.
 - **Git Protocol**:
@@ -21,6 +24,7 @@ The ultimate vision for this project is to be "Outstanding! Magnificent! Insanel
 - **Changelog**: Maintain a detailed `CHANGELOG.md` synchronized with `VERSION.md`.
 
 ## File Specific Instructions
+
 - `VISION.md`: Extensive description of the ultimate goal and design.
 - `MEMORY.md`: Ongoing observations about the codebase and design preferences.
 - `ROADMAP.md`: Major long-term structural plans.
@@ -29,7 +33,12 @@ The ultimate vision for this project is to be "Outstanding! Magnificent! Insanel
 - `IDEAS.md`: A creative list of missing features or improvements from every perspective.
 
 ## Technical Preferences
+
 - **MVVM v2**: Adhere strictly to the MVVM v2 pattern (dumb views, logic in ViewModels).
 - **Arrow Functions**: Use arrow functions for class methods to ensure correct `this` binding.
 - **Accessibility**: Maintain high AX compliance. All features must be well-represented in the UI with labels, descriptions, and tooltips.
 - **Subagents**: Use subagents if possible to implement features in parallel.
+- **Node Memory Allocation**: Monorepo-wide ESLint checks (`pnpm -r --if-present run lint:js`) require `NODE_OPTIONS="--max-old-space-size=8192"` to avoid V8 heap allocation crashes.
+- **TypeScript 6 Extension Stems**: Never create `.ts` and `.tsx` files sharing the identical base filename in the same folder (e.g. `Foo-test.ts` and `Foo-test.tsx`). TypeScript 6 drops the `.tsx` from file matching unless explicitly specified in `files`, which triggers ESLint `parserOptions.project` missing file errors.
+- **Module API Documentation Sync**: When changing public models in `packages/module-api/src/models/`, run `pnpm exec nx build @element-hq/element-web-module-api` and sync changes to `packages/module-api/element-web-module-api.api.md`.
+- **Timeline Window Mocking**: When mocking a Room for `TimelineWindow` in unit tests, `room.getLiveTimeline()` must return an object with a `getTimelineSet()` method that provides a `room` event emitter (`on`/`off`) and `getLiveTimeline()`.

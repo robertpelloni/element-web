@@ -68,7 +68,7 @@ export default function shouldHideEvent(ev: MatrixEvent, ctx?: IRoomState): bool
     if (ev.isRelation(RelationType.Replace)) return true;
 
     // Hide decryption failures if the user has opted to hide them
-    if (ev.isDecryptionFailure() && isEnabled("hideDecryptionFailures")) return true;
+    if (ev.isDecryptionFailure() && isEnabled("hideDecryptionFailures" as any)) return true;
 
     const eventDiff = memberEventDiff(ev);
 

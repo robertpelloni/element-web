@@ -37,10 +37,7 @@
                 "workbench.welcome.enabled": false,
                 "github.copilot.chat.openAtStartup": true
             },
-            "extensions": [
-                "GitHub.copilot",
-                "GitHub.copilot-chat"
-            ]
+            "extensions": ["GitHub.copilot", "GitHub.copilot-chat"]
         }
     }
 }
