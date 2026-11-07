@@ -253,7 +253,9 @@ export class RoomListItemViewModel
         const canMarkAsRead = notifState.level > NotificationLevel.None;
         const canMarkAsUnread = !canMarkAsRead && !isArchived;
 
-        const canInvite = room.canInvite(client.getUserId()!) && !isDm && shouldShowComponent(UIComponent.InviteUsers);
+        const userId = client.getUserId();
+        const canInvite =
+            Boolean(userId && room.canInvite(userId)) && !isDm && shouldShowComponent(UIComponent.InviteUsers);
         const canCopyRoomLink = !isDm;
 
         // Get the current room notification state from EchoChamber
@@ -345,12 +347,20 @@ export class RoomListItemViewModel
     };
 
     public onToggleFavorite = (): void => {
-        tagRoom(this.props.room, DefaultTagID.Favourite);
-        PosthogTrackers.trackInteraction("WebRoomListRoomTileContextMenuFavouriteToggle");
+        try {
+            tagRoom(this.props.room, DefaultTagID.Favourite);
+            PosthogTrackers.trackInteraction("WebRoomListRoomTileContextMenuFavouriteToggle");
+        } catch (e) {
+            console.error("Failed to toggle favourite on room", this.props.room.roomId, e);
+        }
     };
 
     public onToggleLowPriority = (): void => {
-        tagRoom(this.props.room, DefaultTagID.LowPriority);
+        try {
+            tagRoom(this.props.room, DefaultTagID.LowPriority);
+        } catch (e) {
+            console.error("Failed to toggle low priority on room", this.props.room.roomId, e);
+        }
     };
 
     public onInvite = (): void => {
@@ -403,15 +413,23 @@ export class RoomListItemViewModel
     };
 
     public onCreateSection = async (): Promise<void> => {
-        const newTag = await RoomListStoreV3.instance.createSection();
-        // Add the room to the section
-        if (newTag) {
-            tagRoom(this.props.room, newTag);
+        try {
+            const newTag = await RoomListStoreV3.instance.createSection();
+            // Add the room to the section
+            if (newTag) {
+                tagRoom(this.props.room, newTag);
+            }
+        } catch (e) {
+            console.error("Failed to create section for room", this.props.room.roomId, e);
         }
     };
 
     public onToggleSection = (tag: string): void => {
-        tagRoom(this.props.room, tag);
+        try {
+            tagRoom(this.props.room, tag);
+        } catch (e) {
+            console.error("Failed to toggle section for room", this.props.room.roomId, tag, e);
+        }
     };
 
     private onOrderedCustomSectionsChange = (): void => {
