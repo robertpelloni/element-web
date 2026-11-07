@@ -18,5 +18,5 @@
 ## Bugs & Technical Debt
 
 - [x] Address Windows-specific path issues in `scripts/analyse_unused_exports.ts`.
-- [ ] Implement `workflow_call` reusables in mermaid diagram generation scripts.
+- [x] Implement `workflow_call` reusables in mermaid diagram generation scripts.
 - [x] Cache regexps in `packages/shared-components/src/core/i18n/i18n.tsx`.
