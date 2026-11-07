@@ -27,9 +27,17 @@
     - `onRoomTagged`: Re-runs `updateRoomListData(false)` to preserve sticky room positioning during tagging operations.
 - **Test Coverage**:
     - `RoomListViewModel-test.tsx`: 64 tests passing.
+    - `RoomListItemViewModel-test.tsx`: 42 tests passing with coverage for null user IDs and room tagging rejections.
+    - `RoomListSectionHeaderViewModel-test.ts`: 28 tests passing.
     - `RoomUploadViewModel-test.ts` & `RoomUploadContextProvider-test.tsx`: 19 tests passing.
     - `shouldHideEvent-test.ts`: 2 tests passing.
 
-## 4. Frontend Verification
+## 4. Performance & Script Tooling Optimizations
+
+- **i18n Regular Expression Caching**: Added in-memory `RegExp` caching with explicit `lastIndex = 0` resets in `packages/shared-components/src/core/i18n/i18n.tsx` to optimize repeated string token replacements.
+- **Cross-Platform Path Normalization**: Updated `scripts/analyse_unused_exports.ts` with `path.isAbsolute` and Windows drive letter / UNC guards to support both POSIX and Windows runtimes.
+- **Mermaid Automation Triggers**: Added `workflow_call` reusable workflow trigger node support in `scripts/gen-workflow-mermaid.ts`.
+
+## 5. Frontend Verification
 
 - Verified Element Web welcome interface by building production artifacts and capturing visual rendering via Playwright at port 8080 (`/home/jules/verification/element-web-welcome.png`).
