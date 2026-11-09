@@ -10,7 +10,14 @@
 
 ## Upcoming Major Features
 
-- **Enhanced Notifications**: Fully implement and polish the new notification settings and panel.
+- **Enhanced Notifications**: Fully implement and polish the new notification settings and panel:
+    - _Global & Device Controls_: Account-wide global mute toggle and device-level preferences (desktop previews, audio notifications).
+    - _Default Notification Levels_: Fine-grained default levels across rooms and direct messages (All Messages, Mentions & Keywords, Only Mentions).
+    - _Audio Alert Customization_: Distinct sound settings for DMs, mentions/keywords, and VoIP calls.
+    - _Activity Filtering_: Per-event notification toggles for invites, status changes, and bot notices.
+    - _Keyword & Mention Management_: Tag composer for custom keyword highlights with live count badge integration.
+    - _Quick Actions_: Instant shortcuts to mark all notifications as read or restore default preferences.
+    - _MVVM v2 Transition_: Refactor settings view into a reactive ViewModel to separate business rules and push-rule reconciliation from UI rendering.
 - **New Room List**: Complete the implementation and wiring of the new room list, ensuring it's robust and feature-complete.
 - **Advanced Encryption UI**: Polish and improve the user interface for encryption management and device verification.
 - **Live Location Sharing**: Move live location sharing out of development/labs into a stable feature.

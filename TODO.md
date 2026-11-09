@@ -13,6 +13,7 @@
 - [ ] Improve icon rendering accessibility across all components.
 - [ ] Enhance tooltips and descriptions for all lab features.
 - [ ] Refactor legacy components to use MVVM v2 where applicable.
+- [ ] Migrate `NotificationSettings2` to MVVM v2 reactive ViewModel architecture with push rule reconciliation.
 - [ ] Combine redundant functionality in the UI to streamline the user experience.
 
 ## Bugs & Technical Debt
