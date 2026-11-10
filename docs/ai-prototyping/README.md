@@ -41,6 +41,7 @@ Please create a Storybook prototype of the main screen.
 ```
 
 The agent will:
+
 - Extract the file ID and node ID from the URL
 - Validate the connection (and guide you through setup if the token isn't configured)
 - Inspect the Figma file structure

@@ -6,6 +6,7 @@ Please see LICENSE files in the repository root for full details.
 */
 
 import { MatrixEvent, EventType } from "matrix-js-sdk/src/matrix";
+
 import shouldHideEvent from "../../src/shouldHideEvent";
 import SettingsStore from "../../src/settings/SettingsStore";
 

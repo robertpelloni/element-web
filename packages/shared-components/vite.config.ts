@@ -70,6 +70,7 @@ export default defineConfig({
             external: [
                 "@vector-im/compound-design-tokens",
                 "@vector-im/compound-web",
+                "html-react-parser",
                 "react-virtuoso",
                 "react-resizable-panels",
             ],

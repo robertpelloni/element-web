@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as fs from "node:fs";
+import * as path from "node:path";
 import { exec } from "node:child_process";
 
 const includeJSSDK = process.argv.includes("--include-js-sdk");
@@ -43,12 +44,14 @@ exec(command, (error, stdout, stderr) => {
     // Remove the last line as it is empty
     lines.pop();
 
-    // ts-prune has bug where if the unused export is in a dependency, the path
-    // won't have an "/" character at the start, so we try to fix that for
-    // better UX
-    // TODO: This might break on Windows
+    // ts-prune has a bug where if the unused export is in a dependency, the path
+    // won't have an "/" or leading directory separator at the start, so we try to fix that for
+    // better UX while supporting Windows drive letters and separators.
     lines = lines.reduce<string[]>((newLines, line) => {
-        if (!line.startsWith("/")) newLines.push("/" + line);
+        const isAlreadyAbsolute =
+            path.isAbsolute(line) || line.startsWith("/") || line.startsWith("\\") || /^[a-zA-Z]:[/\\]/.test(line);
+
+        if (!isAlreadyAbsolute) newLines.push(path.sep + line);
         else newLines.push(line);
         return newLines;
     }, []);

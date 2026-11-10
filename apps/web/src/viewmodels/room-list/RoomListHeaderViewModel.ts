@@ -16,7 +16,7 @@ import {
 import defaultDispatcher from "../../dispatcher/dispatcher";
 import PosthogTrackers from "../../PosthogTrackers";
 import { Action } from "../../dispatcher/actions";
-import { getMetaSpaceName, MetaSpace, UPDATE_HOME_BEHAVIOUR, UPDATE_SELECTED_SPACE } from "../../stores/spaces";
+import { getMetaSpaceName, type MetaSpace, UPDATE_HOME_BEHAVIOUR, UPDATE_SELECTED_SPACE } from "../../stores/spaces";
 import { type SpaceStoreClass } from "../../stores/spaces/SpaceStore";
 import {
     shouldShowSpaceSettings,

@@ -224,8 +224,13 @@ export class RoomListViewModel
      * This maintains a quick lookup for room objects.
      */
     private updateRoomsMap(roomsResult: RoomsResult): void {
-        for (const room of roomsResult.sections.flatMap((section) => section.rooms)) {
-            this.roomsMap.set(room.roomId, room);
+        for (const section of roomsResult.sections) {
+            if (!section?.rooms) continue;
+            for (const room of section.rooms) {
+                if (room?.roomId) {
+                    this.roomsMap.set(room.roomId, room);
+                }
+            }
         }
     }
 
@@ -244,7 +249,10 @@ export class RoomListViewModel
      * Get the ordered list of room IDs.
      */
     public get roomIds(): string[] {
-        return this.roomsResult.sections.flatMap((section) => section.rooms).map((room) => room.roomId);
+        return this.roomsResult.sections
+            .flatMap((section) => section?.rooms || [])
+            .filter((room): room is Room => Boolean(room?.roomId))
+            .map((room) => room.roomId);
     }
 
     /**
@@ -267,7 +275,12 @@ export class RoomListViewModel
 
             if (!room) {
                 // Race condition: the room list has changed but the view hasn't re-rendered yet.
-                // Return undefined so the view can skip rendering this item.
+                // Clean up any stale cached view model and return undefined.
+                const staleViewModel = this.roomItemViewModels.get(roomId);
+                if (staleViewModel) {
+                    staleViewModel.dispose();
+                    this.roomItemViewModels.delete(roomId);
+                }
                 return undefined;
             }
 
@@ -650,6 +663,8 @@ export class RoomListViewModel
     };
 
     public onRoomTagged = (): void => {
+        // Re-run room list updates without treating it as a room change, preserving sticky room positioning
+        this.updateRoomListData(false);
         this.showToast("chat_moved");
     };
 
@@ -670,6 +685,7 @@ export class RoomListViewModel
     }
 
     public changeRoomSection = (roomId: string, tag: string): void => {
+        if (!roomId || !tag) return;
         const room = this.props.client.getRoom(roomId);
         if (!room) return;
 
@@ -677,7 +693,12 @@ export class RoomListViewModel
         // Room is already in the section
         if (currentTag === tag) return;
 
-        tagRoom(room, tag);
+        try {
+            tagRoom(room, tag);
+        } catch (e) {
+            // Defensive logging and error handling
+            console.error("Failed to tag room", roomId, tag, e);
+        }
     };
 }
 

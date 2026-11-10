@@ -616,6 +616,44 @@ describe("RoomListItemViewModel", () => {
 
             expect(tagRoomSpy).toHaveBeenCalledWith(room, DefaultTagID.Favourite);
         });
+
+        it("should handle error gracefully when tagRoom fails on onToggleSection", () => {
+            jest.spyOn(tagRoomModule, "tagRoom").mockImplementation(() => {
+                throw new Error("tagging failure");
+            });
+            const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+            viewModel = new RoomListItemViewModel({ room, client: matrixClient });
+
+            expect(() => viewModel.onToggleSection(DefaultTagID.Favourite)).not.toThrow();
+            expect(consoleSpy).toHaveBeenCalledWith(
+                "Failed to toggle section for room",
+                room.roomId,
+                DefaultTagID.Favourite,
+                expect.any(Error),
+            );
+        });
+
+        it("should handle error gracefully when createSection or tagRoom fails in onCreateSection", async () => {
+            jest.spyOn(RoomListStoreV3.instance, "createSection").mockRejectedValue(
+                new Error("section creation failed"),
+            );
+            const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+            viewModel = new RoomListItemViewModel({ room, client: matrixClient });
+
+            await expect(viewModel.onCreateSection()).resolves.toBeUndefined();
+            expect(consoleSpy).toHaveBeenCalledWith(
+                "Failed to create section for room",
+                room.roomId,
+                expect.any(Error),
+            );
+        });
+
+        it("should handle null userId safely without error in canInvite", () => {
+            jest.spyOn(matrixClient, "getUserId").mockReturnValue(null);
+            viewModel = new RoomListItemViewModel({ room, client: matrixClient });
+
+            expect(viewModel.getSnapshot().canInvite).toBe(false);
+        });
     });
 
     describe("Sections", () => {

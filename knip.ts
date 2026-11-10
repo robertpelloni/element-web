@@ -5,7 +5,9 @@ process.env.GITHUB_ACTIONS = "1";
 
 export default {
     workspaces: {
-        "packages/shared-components": {},
+        "packages/shared-components": {
+            ignore: ["src/room/timeline/event-tile/EventTileView/E2ePadlock/index.tsx"],
+        },
         "packages/playwright-common": {
             entry: ["src/fixtures/index.ts", "src/testcontainers/index.ts"],
             ignoreDependencies: [
@@ -31,8 +33,13 @@ export default {
             ignore: [
                 // Keep for now
                 "src/hooks/useLocalStorageState.ts",
+                "src/@types/commonmark.ts",
+                "src/components/views/messages/MJitsiWidgetEvent.tsx",
+                "src/components/views/messages/RoomAvatarEvent.tsx",
+                "src/components/views/messages/ViewSourceEvent.tsx",
             ],
             ignoreDependencies: [
+                "geojson",
                 // False positive
                 "sw.js",
                 // Used by webpack
@@ -60,6 +67,8 @@ export default {
         },
         ".": {
             entry: ["scripts/**", "docs/**"],
+            ignore: [".devcontainer/**"],
+            ignoreBinaries: ["build-stats", "diff-i18n"],
         },
     },
     ignoreExportsUsedInFile: true,

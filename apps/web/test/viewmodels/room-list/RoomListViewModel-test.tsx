@@ -1151,5 +1151,45 @@ describe("RoomListViewModel", () => {
 
             expect(tagRoom).not.toHaveBeenCalled();
         });
+
+        it("should safely ignore empty room ID or tag", () => {
+            viewModel.changeRoomSection("", DefaultTagID.Favourite);
+            viewModel.changeRoomSection(room1.roomId, "");
+
+            expect(tagRoom).not.toHaveBeenCalled();
+        });
+
+        it("should catch errors thrown by tagRoom defensively", () => {
+            jest.spyOn(matrixClient, "getRoom").mockReturnValue(room1);
+            mocked(getSectionTagForRoom).mockReturnValue(null);
+            mocked(tagRoom).mockImplementation(() => {
+                throw new Error("Tagging failure");
+            });
+            const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+            expect(() => {
+                viewModel.changeRoomSection(room1.roomId, DefaultTagID.Favourite);
+            }).not.toThrow();
+            expect(consoleSpy).toHaveBeenCalledWith(
+                "Failed to tag room",
+                room1.roomId,
+                DefaultTagID.Favourite,
+                expect.any(Error),
+            );
+            consoleSpy.mockRestore();
+        });
+    });
+
+    describe("onRoomTagged", () => {
+        it("should re-run room list updates preserving sticky rooms and display toast", () => {
+            viewModel = new RoomListViewModel({ client: matrixClient });
+            const updateSpy = jest.spyOn(viewModel as any, "updateRoomListData");
+            const toastSpy = jest.spyOn(viewModel as any, "showToast");
+
+            viewModel.onRoomTagged();
+
+            expect(updateSpy).toHaveBeenCalledWith(false);
+            expect(toastSpy).toHaveBeenCalledWith("chat_moved");
+        });
     });
 });

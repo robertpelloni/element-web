@@ -16,6 +16,7 @@ Your job is to help designers turn Figma designs into interactive prototypes —
 ## Before You Start — Read the Guidelines
 
 At the beginning of every conversation, read these files to avoid unnecessary round-trips:
+
 - `docs/ai-prototyping/design-tokens.md` — spacing, colour and typography tokens
 - `docs/ai-prototyping/storybook-guidelines.md` — story file conventions and naming rules
 
@@ -24,6 +25,7 @@ At the beginning of every conversation, read these files to avoid unnecessary ro
 Designers will paste full Figma URLs. Parse them as follows:
 
 **Example URLs:**
+
 - `https://www.figma.com/design/IjNuVxaLRhe2MotMWJ9EtG/ER-237--User-status?node-id=417-19911&t=1Zqd1fG7iLLIWuBI-0`
 - `https://www.figma.com/design/AbCdEfGhIjK/My-File?node-id=12-34`
 - `https://www.figma.com/file/AbCdEfGhIjK/My-File`
@@ -31,6 +33,7 @@ Designers will paste full Figma URLs. Parse them as follows:
 - `https://www.figma.com/board/AbCdEfGhIjK/...`
 
 **Extraction rules:**
+
 1. **File key** — the path segment immediately after `/design/`, `/file/`, or `/board/`. It is the alphanumeric string before the next `/`. Example: from `.../design/IjNuVxaLRhe2MotMWJ9EtG/ER-237--User-status?...` extract `IjNuVxaLRhe2MotMWJ9EtG`.
 2. **Node ID** — look for the `node-id` query parameter. Convert the URL-encoded dash format to Figma's colon format: `417-19911` → `417:19911`, `12-34` → `12:34`. Ignore any other query parameters like `t=`, `m=`, etc.
 
@@ -62,6 +65,7 @@ Before doing anything, call `get_figma_data` with the file key from the URL.
 - If the **tool doesn't exist** (MCP server not running) — tell the designer:
 
 > **The Figma MCP server isn't running.** The Figma for VS Code extension may not have loaded yet.
+>
 > 1. Try **Command Palette → "Developer: Reload Window"** first.
 > 2. If that doesn't work, **Command Palette → "Codespaces: Rebuild Container"**.
 > 3. Still broken? Check **View → Output → "GitHub Copilot Chat"** for MCP startup errors.
@@ -87,13 +91,14 @@ If the designer says things like "show me this in the app", "prototype in Elemen
 1. Parse the Figma URL the designer provides (extract `fileKey` and optional `nodeId`).
 2. Validate the connection (see above).
 3. **If a node ID was found in the URL:**
-   - Call `get_figma_data` with the full URL to get the detailed layout tree for that specific frame/component. This is the primary design reference — summarise the node name, type, and child structure for the designer.
+    - Call `get_figma_data` with the full URL to get the detailed layout tree for that specific frame/component. This is the primary design reference — summarise the node name, type, and child structure for the designer.
 4. **If no node ID was found:**
-   - Call `get_figma_data` with the file URL to see the page/frame structure.
-   - Present the available frames and ask the designer which one to prototype, or pick the most prominent one if the request is clear.
-   - Then fetch the chosen frame by adding its node ID.
+    - Call `get_figma_data` with the file URL to see the page/frame structure.
+    - Present the available frames and ask the designer which one to prototype, or pick the most prominent one if the request is clear.
+    - Then fetch the chosen frame by adding its node ID.
 
 ### For Mode A (Storybook):
+
 5. Create or update a `*.stories.tsx` file in `packages/shared-components/src/prototypes/ai/`.
 6. Use existing components from `packages/shared-components` first, then `@vector-im/compound-web` primitives.
 7. Keep the story title under the `AI Prototypes/` namespace.
@@ -101,6 +106,7 @@ If the designer says things like "show me this in the app", "prototype in Elemen
 9. Confirm the file was saved — tell the designer the story name, where to find it in the Storybook sidebar, and summarise what it renders.
 
 ### For Mode B (Element Web):
+
 5. Identify which existing Element Web component best corresponds to the Figma design. Search `apps/web/src/components/` for similar components and read them to understand the patterns.
 6. Create or modify component files under `apps/web/src/components/`. Match the existing code patterns and directory layout (e.g. `views/rooms/`, `views/settings/`, `structures/`).
 7. Use Compound Web primitives (`@vector-im/compound-web`) and Compound design tokens (`--cpd-*`) — these are already used throughout Element Web.

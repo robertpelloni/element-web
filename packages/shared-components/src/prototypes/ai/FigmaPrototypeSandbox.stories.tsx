@@ -7,8 +7,8 @@
 
 import React, { type JSX } from "react";
 import { Button } from "@vector-im/compound-web";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import styles from "./FigmaPrototypeSandbox.module.css";
 
 type StepData = {
@@ -27,8 +27,7 @@ const SETUP_STEPS: StepData[] = [
         title: "Open Copilot Chat and select the Designer agent",
         description:
             "Open Copilot Chat (\u2318\u21e7I on Mac \u00b7 Ctrl+Shift+I on Windows/Linux), select the Designer agent from the agent picker, then paste any Figma URL. The Figma MCP server is already configured in this Codespace \u2014 no tokens or secrets needed.",
-        prompt:
-            "@designer Here\u2019s my design: https://www.figma.com/design/YOUR_FILE_ID/My-Design \u2014 please create a Storybook prototype of the main screen.",
+        prompt: "@designer Here\u2019s my design: https://www.figma.com/design/YOUR_FILE_ID/My-Design \u2014 please create a Storybook prototype of the main screen.",
         hint: "Your story appears in this Storybook panel under AI Prototypes the moment it saves.",
     },
     {
@@ -77,7 +76,7 @@ function StepCard({ step, isLast }: { step: StepData; isLast: boolean }): JSX.El
                             target="_blank"
                             rel="noopener noreferrer"
                             kind="secondary"
-                            size="sm"
+                            size="md"
                         >
                             {step.action.label} ↗
                         </Button>
@@ -97,9 +96,9 @@ function DesignerSetupGuide(): JSX.Element {
                     <span className={styles.badge}>AI Prototyping Environment</span>
                     <h1 className={styles.headline}>Welcome — you're ready to go 🚀</h1>
                     <p className={styles.lead}>
-                        This Codespace connects Figma to a live Storybook via the Designer agent in Copilot Chat.
-                        The Figma MCP server is already configured — just open Copilot Chat, paste a Figma URL, and
-                        the agent will build an interactive component story for you. No tokens or setup required.
+                        This Codespace connects Figma to a live Storybook via the Designer agent in Copilot Chat. The
+                        Figma MCP server is already configured — just open Copilot Chat, paste a Figma URL, and the
+                        agent will build an interactive component story for you. No tokens or setup required.
                     </p>
                 </header>
 

@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -60,7 +61,11 @@ interface ChatFilterBarProps {
     onChange?: (filter: SearchFilter) => void;
 }
 
-export function ChatFilterBar({ active = "All", filters = ALL_FILTERS, onChange }: ChatFilterBarProps): React.JSX.Element {
+export function ChatFilterBar({
+    active = "All",
+    filters = ALL_FILTERS,
+    onChange,
+}: ChatFilterBarProps): React.JSX.Element {
     const [current, setCurrent] = useState<SearchFilter>(active);
 
     const handleClick = (filter: SearchFilter): void => {
@@ -109,11 +114,13 @@ export const Active: Story = {
 };
 
 export const AllChips: Story = {
+    args: { label: "All" },
     render: () => <ChatFilterBar />,
     name: "Filter Bar (all chips)",
 };
 
 export const PeopleActive: Story = {
+    args: { label: "People", active: true },
     render: () => <ChatFilterBar active="People" />,
     name: "Filter Bar — People active",
 };

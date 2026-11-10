@@ -220,7 +220,6 @@ interface WorkflowYaml {
  */
 type Trigger = Node;
 
-// TODO workflow_call reusables
 /* eslint-disable @typescript-eslint/naming-convention */
 const TRIGGERS: {
     [key in keyof WorkflowYaml["on"]]: (
@@ -231,6 +230,11 @@ const TRIGGERS: {
     workflow_dispatch: () => ({
         id: "on:workflow_dispatch",
         name: "Manual",
+        shape: "circle",
+    }),
+    workflow_call: () => ({
+        id: "on:workflow_call",
+        name: "Reusable Workflow",
         shape: "circle",
     }),
     issues: (_, { project }) => ({ id: `on:issues/${project.name}`, name: `${project.name} Issues`, shape: "circle" }),

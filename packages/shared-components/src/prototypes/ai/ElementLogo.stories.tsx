@@ -17,7 +17,11 @@ interface ElementLogoProps {
     logoAlt?: string;
 }
 
-function ElementLogo({ logoText = "element", badgeText = "PRO", logoAlt = "Element" }: ElementLogoProps): React.JSX.Element {
+function ElementLogo({
+    logoText = "element",
+    badgeText = "PRO",
+    logoAlt = "Element",
+}: ElementLogoProps): React.JSX.Element {
     return (
         <div
             style={{

@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -116,6 +117,7 @@ export const Space: Story = { args: { type: "Space" } };
 export const Recent: Story = { args: { type: "Recent" } };
 
 export const AllIcons: Story = {
+    args: { type: "Room" },
     render: () => (
         <div style={{ display: "flex", gap: "var(--cpd-space-3x)", alignItems: "center" }}>
             {(["Room", "Message", "Person", "Space", "Recent"] as SearchResultType[]).map((t) => (

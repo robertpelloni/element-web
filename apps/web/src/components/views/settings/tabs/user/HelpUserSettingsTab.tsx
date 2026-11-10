@@ -86,20 +86,14 @@ export default class HelpUserSettingsTab extends React.Component<EmptyObject, IS
                 description={_t("setting|help_about|documentation_description")}
             >
                 <div className="mx_HelpUserSettingsTab_resources">
-                    <ExternalLink
-                        href="https://github.com/robertpelloni/element-web/tree/main/docs"
-                        kind="primary"
-                    >
+                    <ExternalLink href="https://github.com/robertpelloni/element-web/tree/main/docs">
                         {_t("setting|help_about|project_documentation")}
                     </ExternalLink>
                 </div>
                 <SettingsSubsectionText>
                     {_t("setting|help_about|repository_description")}
                     <br />
-                    <ExternalLink
-                        href="https://github.com/robertpelloni/element-web"
-                        kind="primary"
-                    >
+                    <ExternalLink href="https://github.com/robertpelloni/element-web">
                         {_t("setting|help_about|source_repository")}
                     </ExternalLink>
                 </SettingsSubsectionText>
