@@ -12,6 +12,7 @@ To create the most complete, robust, useful, and functional Matrix web and deskt
 - **Flawless UI/UX**: All UI should work perfectly, be well-documented within the interface (labels, descriptions, tooltips), and have high-quality external documentation.
 - **Intelligent Integration**: Intelligently merge and solve conflicts from various feature branches to ensure no progress is lost and no regressions are caused.
 - **Autonomous Evolution**: The project should continuously iterate and innovate, expanding and increasing user satisfaction and delight.
+- **Matrix Protocol Standards & Compliance**: Full fidelity with the Matrix specification, adhering strictly to event typing, room state semantics, push rules, and robust error recovery across all client interactions.
 
 ## Design Principles
 
